@@ -1,0 +1,19 @@
+#https://www.hackerrank.com/challenges/pairs/problem?h_l=interview&isFullScreen=true&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=search
+def pairs(k, arr):
+    mySet = set(arr)
+    result = 0
+    while len(mySet) != 0:
+        myElement = mySet.pop()
+        streak = 1
+        current = myElement
+        while current+k in mySet:
+            streak += 1
+            current += k
+            mySet.remove(current)
+        current = myElement
+        while current-k in mySet:
+            streak += 1
+            current -= k
+            mySet.remove(current)
+        result += streak-1
+    return result
