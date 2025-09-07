@@ -1,0 +1,29 @@
+#https://www.hackerrank.com/challenges/sherlock-and-valid-string/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=strings
+def isValid(s):
+    dict1 = {}
+    for i in s:
+        dict1[i] = dict1.get(i, 0) +1
+    print(dict1)
+    dict2 = {}
+    for i in dict1.values():
+        dict2[i] = dict2.get(i,0) +1
+    print(dict2)
+    if len(dict2.values())>2:
+        return "NO"
+    elif len(dict2.values()) ==1:
+        return "YES"
+    else:
+        keysWithValue1 = []
+        for i in dict2.keys():
+            if dict2[i]==1:
+                keysWithValue1.append(i)
+        if len(keysWithValue1) == 0:
+            return "NO"
+    for i in keysWithValue1:
+        if i == 1:
+            return "YES"
+    for i in keysWithValue1:
+        for x in dict2.keys():
+            if x == i-1:
+                return "YES"
+    return "NO"
