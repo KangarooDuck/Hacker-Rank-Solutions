@@ -1,0 +1,13 @@
+#https://www.hackerrank.com/challenges/greedy-florist/problem?h_l=interview&isFullScreen=true&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=greedy-algorithms
+def getMinimumCost(k, c):
+    c.sort(reverse=True)
+    friendcounter = 0
+    loops = 0
+    total = 0
+    for i in c:
+        total += (1+loops)*i
+        friendcounter += 1
+        if friendcounter == k:
+            loops += 1
+            friendcounter = 0
+    return total
