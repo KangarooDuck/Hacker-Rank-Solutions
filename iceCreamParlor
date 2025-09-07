@@ -1,0 +1,23 @@
+#https://www.hackerrank.com/challenges/ctci-ice-cream-parlor/problem?h_l=interview&isFullScreen=true&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=search
+def whatFlavors(cost, money):
+    oppositeDict = {}
+    for i in cost:
+        if oppositeDict.get(i,10**10) != 10**10:
+            if oppositeDict[i] == i:
+                correctIndexes = []
+                for x in range(len(cost)):
+                    if cost[x] == i:
+                        correctIndexes.append(x)
+                print(str(min(correctIndexes[0],correctIndexes[1])+1)+" "+str(max(correctIndexes[0],correctIndexes[1])+1))
+                return
+        oppositeDict[i] = money-i
+    for i in range(len(cost)):
+        theCost = cost[i]
+        if oppositeDict.get(oppositeDict[theCost], 0) != 0:
+            if oppositeDict[theCost] != theCost:
+                firstIndex = i
+                secondFlavorCost = money-theCost
+    for i in range(len(cost)):
+        if cost[i] == secondFlavorCost:
+            secondIndex = i
+    print(str(min(firstIndex,secondIndex)+1) + " " + str(max(firstIndex,secondIndex)+1))
