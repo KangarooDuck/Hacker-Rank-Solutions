@@ -1,0 +1,24 @@
+#https://www.hackerrank.com/challenges/new-year-chaos/problem?h_l=interview&isFullScreen=true&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=arrays
+def minimumBribes(q):
+    result = 0
+    chaotic = False
+    for i in range(len(q)):
+        index = len(q)-1-i
+        correct = len(q)-i
+        if q[index] != correct:
+            if q[index-1]==correct:
+                result += 1
+                q[index-1] = q[index]
+                q[index] = correct
+            elif q[index-2]==correct:
+                result += 2
+                q[index-2] = q[index-1]
+                q[index-1] = q[index]
+                q[index] = correct
+            else:
+                chaotic = True
+                break
+    if chaotic:
+        print("Too chaotic")
+    else:
+        print(result)
