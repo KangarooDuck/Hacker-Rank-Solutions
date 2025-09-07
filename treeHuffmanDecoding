@@ -1,0 +1,16 @@
+#https://www.hackerrank.com/challenges/tree-huffman-decoding/problem?h_l=interview&isFullScreen=true&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=trees
+def decodeHuff(root, s):
+    sIndex = 0
+    currentNode = root
+    decodedString = ""
+    while sIndex < len(s):
+        digit = int(s[sIndex])
+        if digit == 1:
+            currentNode = currentNode.right
+        else:
+            currentNode = currentNode.left
+        if (not currentNode.left) and (not currentNode.right):
+            decodedString += currentNode.data
+            currentNode = root
+        sIndex += 1
+    print(decodedString)
