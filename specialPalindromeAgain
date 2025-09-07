@@ -1,0 +1,21 @@
+#https://www.hackerrank.com/challenges/special-palindrome-again/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=strings
+def substrCount(n, s):
+    groupedList = []
+    countList = []
+    groupedList.append(s[0])
+    countList.append(1)
+    for stringIndex in range(1, len(s)):
+        if groupedList[-1] == s[stringIndex]:
+            countList[-1] += 1
+        else:
+            groupedList.append(s[stringIndex])
+            countList.append(1)
+    print(groupedList)
+    print(countList)
+    result = 0
+    for groupIndex in range(len(groupedList)):
+        result += (countList[groupIndex]+1)*(countList[groupIndex])/2
+        if groupIndex>=2:
+            if (countList[groupIndex-1] == 1) and (groupedList[groupIndex] == groupedList[groupIndex-2]):
+                result += min(countList[groupIndex], countList[groupIndex-2])
+    return int(result)
