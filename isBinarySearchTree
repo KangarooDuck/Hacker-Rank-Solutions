@@ -1,0 +1,34 @@
+#https://www.hackerrank.com/challenges/ctci-is-binary-search-tree/problem?h_l=interview&isFullScreen=true&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=trees
+import heapq
+def checkBST(root):
+    return not dfs(root)[2]
+def dfs(root):
+    #just return (smallest, largest), then the parent can just check that
+    largest = root.data
+    smallest = root.data
+    bad = False
+    if root.left:
+        leftResult = dfs(root.left)
+        leftSmallest = leftResult[0]
+        leftLargest = leftResult[1]
+        if leftResult[2]:
+            bad = True
+        if leftLargest >= smallest:
+            #this is bad
+            bad = True
+        else:
+            #print("this root:" +str(root.data) + "left smallest:" + str(leftSmallest))
+            smallest = leftSmallest
+    if root.right:
+        rightResult = dfs(root.right)
+        rightLargest = rightResult[1]
+        rightSmallest = rightResult[0]
+        if rightResult[2]:
+            bad = True
+        if rightSmallest <= largest:
+            #this is also bad
+            bad = True
+        else:
+            #print("this root:" +str(root.data) + "right largest:" + str(rightLargest))
+            largest = rightLargest
+    return (smallest, largest, bad)
