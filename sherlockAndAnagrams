@@ -1,0 +1,18 @@
+#https://www.hackerrank.com/challenges/sherlock-and-anagrams/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dictionaries-hashmaps
+
+def sherlockAndAnagrams(s):
+    freqDict = {}
+    #get all the substrings
+    for start in range(len(s)):
+        for end in range(start+1, len(s)+1):
+            freqList = [0, ]*26
+            for letterIndex in range(start,end):
+                letter = s[letterIndex]
+                listIndex = ord(letter)-ord("a")
+                freqList[listIndex] += 1
+            freqTuple = tuple(freqList)
+            freqDict[freqTuple] = freqDict.get(freqTuple, 0) + 1
+    result = 0
+    for count in freqDict.values():
+        result += count*(count-1)/2
+    return int(result)
