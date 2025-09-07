@@ -1,0 +1,38 @@
+#https://www.hackerrank.com/challenges/abbr/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dynamic-programming
+def abbreviation(a, b):
+    matchesList = deque()
+    matchesList.append(0)
+    currentAIndex = 0
+    while len(matchesList) != 0 and currentAIndex < len(a):
+        #print(matchesList)
+        theLetter = a[currentAIndex]
+        capitalVersion = theLetter.capitalize()
+        currentLength = len(matchesList)
+        setToBeAdded = set()
+        for i in range(currentLength):
+            bIndex = matchesList.popleft()
+            if bIndex == len(b):
+                if theLetter.isupper():
+                    pass
+                else:
+                    setToBeAdded.add(bIndex)
+                continue
+            doesItMatch = (capitalVersion==b[bIndex])
+            if doesItMatch:
+                if theLetter.isupper():
+                    setToBeAdded.add(bIndex+1)
+                else:
+                    setToBeAdded.add(bIndex)
+                    setToBeAdded.add(bIndex+1)
+            else:
+                if theLetter.isupper():
+                    pass
+                else:
+                    setToBeAdded.add(bIndex)
+        for i in setToBeAdded:
+            matchesList.append(i)
+        currentAIndex += 1
+    while len(matchesList) != 0:
+        if len(b) == matchesList.popleft():
+            return "YES"
+    return "NO"
